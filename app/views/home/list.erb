@@ -1,0 +1,15 @@
+<div class="list-group">
+    <% @post_list.each do |p| %>
+        <div class="list-group-item">
+            <p class="list-group-item-text"><%= p.email %></p>
+            <br>
+            <h4 class="list-group-item-heading"><%= p.title %></h4>
+            <br>
+            <p class="list-group-item-text"><%= p.content %></p>
+            <br>
+            <p class="list-group-item-text"><%= p.created_at %></p>
+        </div>
+    <% end %>
+</div>
+
+<a href="/">메일 작성하러 가기</a>
