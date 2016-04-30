@@ -6,30 +6,40 @@ class HomeController < ApplicationController
     end
     
     def write
-        @address = params[:receiver]
         @title = params[:title]
         @content = params[:content]
         
-        
-        mg_client = Mailgun::Client.new("key-b4be63bce7bdf34ac58a2588efcd3bc6")
-        
-        message_params =  {
-                           from: 'postmaster@sandbox27b08378169e476781f930d041219089.mailgun.org',
-                           to:   @address,
-                           subject: @title,
-                           text:    @content
-                          }
-        
-        result = mg_client.send_message('sandbox27b08378169e476781f930d041219089.mailgun.org', message_params).to_h!
-        
-        message_id = result['id']
-        message = result['message']
-        
         new_post = Post.new
-        new_post.email=@address
         new_post.title=@title
         new_post.content=@content
         new_post.save
+        
+        redirect_to "/list"
+    end
+    
+    def deleteC
+        @id = params[:id_of_comment]
+        comment=Comment.find(@id)
+        comment.destroy
+        redirect_to "/list"
+        
+    end
+    
+    def deleteP
+        @id = params[:id_of_post]
+        comment=Post.find(@id)
+        comment.destroy
+        redirect_to "/list"
+        
+    end
+    
+    def writeC
+       @comment = params[:com]
+       @id_of_post = params[:id_of_post]
+        new_comment = Comment.new
+        new_comment.content= @comment
+        new_comment.post_id= @id_of_post
+        new_comment.save
         
         redirect_to "/list"
     end
