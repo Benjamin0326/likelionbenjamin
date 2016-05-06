@@ -19,6 +19,8 @@
             <br>
             <p class="list-group-item-text"><%= p.content %></p>
             <br>
+            <p class="list-group-item-text">Length : <%= p.content.length %> <br>Length(except blank) : <%= (p.content.length)-(p.content.count " ") %><br> Words : <%= (p.content.count " ")+1 %></p>
+            <br>
             <p class="list-group-item-text"><%= p.created_at %></p>
             <br>
             <% p.comments.each do |r| %>
